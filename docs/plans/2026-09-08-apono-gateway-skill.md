@@ -34,7 +34,7 @@ The deliverable is one public repository that holds one skill file, distributed 
 
 The repository `apono-io/skills` holds `skills/apono/SKILL.md` and a `README.md`. The repository has no build step, no package manifest, and no continuous integration. The skill is prose.
 
-The `skills` CLI reads a skill directly from a Git repository, so no registry entry exists. The CLI takes the skill name from the directory name, so the directory name `apono` produces the `/apono` command. The CLI detects each AI client on the machine and links the skill into all of them.
+The `skills` CLI reads a skill directly from a Git repository, so no registry entry exists. The CLI takes the skill name from the directory name, so the directory name `apono` produces the `/apono` command. The CLI detects each AI coding agent on the machine and installs the skill into each one it finds.
 
 The table below lists the commands a customer runs. A maintainer publishes a change by merging it to the default branch, because the CLI reads the branch and not a released package.
 
@@ -165,9 +165,9 @@ This branch is the only action in the skill that changes the machine, and it run
 - **AC-10**: THE skill SHALL claim no access on behalf of an account, and SHALL treat run-time discovery as the only source of what an account reaches.
 - **AC-11**: WHEN a maintainer merges a change to the default branch, THE update command SHALL deliver that change without a package release.
 - **AC-12**: WHEN a user directs the agent to a named local tool, THE agent SHALL comply, and SHALL state once that the call is outside Apono.
-- **AC-15**: WHEN a task names read-only inspection of a system in a listed domain, THE host SHALL activate the skill before the agent decides whether the task needs access.
-- **AC-14**: WHEN the `skills` CLI reads the repository, THE CLI SHALL parse the skill file and report one installed skill named `apono`.
 - **AC-13**: WHEN a user states only the outcome of a task, THE agent SHALL treat the statement as no override, and SHALL follow the discovery step.
+- **AC-14**: WHEN the `skills` CLI reads the repository, THE CLI SHALL parse the skill file and report one installed skill named `apono`.
+- **AC-15**: WHEN a task names read-only inspection of a system in a listed domain, THE host SHALL activate the skill before the agent decides whether the task needs access.
 
 ## Backward Compatibility
 
