@@ -50,6 +50,17 @@ The frontmatter `description` carries the trigger vocabulary. A host matches a r
 
 The body carries the policy and the procedure. The body states that Apono decides access for the listed domains, and it states the order of steps. The body carries no trigger words, because the body loads only after the skill activates.
 
+### The description is a YAML block scalar
+
+The `description` value uses a block scalar (`>-`) rather than a plain one. A plain YAML
+scalar ends at a colon followed by a space, so a description that names a list after a
+colon is invalid YAML. The `skills` CLI rejects the file and reports that the repository
+contains no skills, which installs nothing and reports no error the user can act on.
+
+The CLI is the only validator that matters, because it parses the file the way a host
+parses it. A character count against the frontmatter cap does not detect this class of
+fault.
+
 ### The description covers every domain, including the flagged ones
 
 The description names each domain in the managed catalog whose definition is released, whether or not a feature flag gates it. The Kubernetes and MongoDB definitions carry feature flags, and the AWS definition carries a flag on one variant. A gated domain still belongs in the description, because a trigger word is not a claim about the account. The run-time discovery step decides what the account reaches. The description omits Slack, because the catalog marks that definition as not yet released.
@@ -103,7 +114,7 @@ The table below lists the excuses the body answers.
 | The operation is read-only | Reads are what access control governs, and an unbrokered read leaves no record |
 | A teammate configured the credential | Installing a credential is not deciding this task may use it |
 | An incident is in progress | Urgency changes which target the agent requests, never whether it asks |
-| The agent will disclose the bypass | Disclosure does not authorize the call |
+| The agent discloses the bypass | Disclosure does not authorize the call |
 | Another MCP server for the system is installed | A second tool outside Apono is a gap between access systems |
 | The credential outlived the denial | The denial is the decision |
 | Both paths can run at once | The local call lands first, so the broker decided nothing |
@@ -139,6 +150,7 @@ This branch is the only action in the skill that changes the machine, and it run
 - **AC-10**: THE skill SHALL claim no access on behalf of an account, and SHALL treat run-time discovery as the only source of what an account reaches.
 - **AC-11**: WHEN a maintainer merges a change to the default branch, THE update command SHALL deliver that change without a package release.
 - **AC-12**: WHEN a user directs the agent to a named local tool, THE agent SHALL comply, and SHALL state once that the call is outside Apono.
+- **AC-14**: WHEN the `skills` CLI reads the repository, THE CLI SHALL parse the skill file and report one installed skill named `apono`.
 - **AC-13**: WHEN a user states only the outcome of a task, THE agent SHALL treat the statement as no override, and SHALL follow the discovery step.
 
 ## Backward Compatibility

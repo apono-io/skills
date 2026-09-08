@@ -1,6 +1,14 @@
 ---
 name: apono
-description: Use when a task touches infrastructure or SaaS that Apono brokers: AWS (S3, EC2, EKS, Lambda, RDS, IAM, Secrets Manager, DynamoDB, SQS, KMS, Route53), Kubernetes clusters, namespaces, pods, deployments, secrets, Helm, PostgreSQL, MySQL, MongoDB databases, GitHub repos, PRs, issues, Jira, Confluence, Grafana dashboards, Prometheus, Loki, alerts, on-call, Okta apps and groups, Mixpanel, monday.com. Use before running aws, kubectl, helm, psql, mysql, mongosh, gh, terraform, or a separate MCP server for those systems, and when access is missing, denied, or pending.
+description: >-
+  Use when a task touches infrastructure or SaaS that Apono brokers - AWS (S3, EC2, EKS,
+  Lambda, RDS, IAM, Secrets Manager, DynamoDB, SQS, KMS, Route53), Kubernetes clusters,
+  namespaces, pods, deployments, secrets, Helm, PostgreSQL, MySQL, MongoDB databases,
+  GitHub repositories, opening or reviewing a pull request, issues, branches, Jira,
+  Confluence, Grafana dashboards, Prometheus, Loki, alerts, on-call, Okta apps and groups,
+  Mixpanel, monday.com. Use before running aws, kubectl, helm, psql, mysql, mongosh, gh,
+  terraform, or a separate MCP server for those systems, and when access is missing,
+  denied, or pending.
 ---
 
 # Apono
@@ -89,8 +97,11 @@ outcome; it does not choose the local tool.
 
 ## When Apono is not connected
 
-If no Apono tools are present in the session, the gateway is not registered on this
-machine. Tell the user, and offer to install it. Wait for confirmation before running
+Check for the Apono MCP *server*, not for its tools. A host may list a connected server's
+tools only on demand, so an absent tool name does not mean an absent gateway. The gateway
+is missing only when no `apono-agentic` server is connected to the session at all.
+
+In that case, tell the user, and offer to install it. Wait for confirmation before running
 anything.
 
 <!-- MAINTAINERS: replace the line below with the published installer one-liner. -->
