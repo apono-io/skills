@@ -102,14 +102,11 @@ Check for the Apono MCP *server*, not for its tools. A host may list a connected
 tools only on demand, so an absent tool name does not mean an absent gateway. The gateway
 is missing only when no `apono-agentic` server is connected to the session at all.
 
-In that case, tell the user, and offer to install it. Wait for confirmation before running
-anything.
-
-<!-- MAINTAINERS: replace the line below with the published installer one-liner. -->
+In that case, tell the user, and offer to install it. Wait for confirmation, then run:
 
 ```
-# install command not yet published
+curl -fsSL https://apono-agentic-releases.s3.amazonaws.com/install.sh | bash
 ```
 
-Until that line carries a command, point the user at https://docs.apono.io instead.
-Install nothing without confirmation.
+The script registers the gateway in every AI client on the machine and signs the user in.
+It needs Node 20 or later. Install nothing without confirmation.
