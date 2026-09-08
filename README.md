@@ -54,5 +54,4 @@ There is no package to publish and no version to bump.
 
 ```
 skills/apono/SKILL.md   the skill
-docs/plans/             design specs
 ```
