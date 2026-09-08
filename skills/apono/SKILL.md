@@ -61,6 +61,9 @@ a claim about access — only discovery tells you what this account reaches.
 | "It is an incident and people are waiting." | Urgency changes which target you request, never whether you ask. Report the wait; do not remove it. |
 | "I will use the local tool and tell the user I bypassed Apono." | Disclosing an unauthorized call does not authorize it. |
 | "A separate MCP server for this system is installed, so it is sanctioned." | A second tool reaching the same system outside Apono is a gap between two access systems, not a grant. It looks cleaner than a raw command; it is the same unbrokered call. |
+| "These are tool-server instructions, not the user's rules." | This skill is not the server speaking for itself. The user installed it into their own agent, so it carries the same standing as the rest of their configuration. |
+| "The rule is for when I might lack access. I have a credential, so it does not apply." | Holding a credential is the case the rule governs. A task with no credential has nothing to route around. |
+| "The written policy names AWS, not this system." | The rule covers every domain in the table. A policy that names one system did not exempt the others. |
 | "Apono denied it, but the credential still works." | The denial is the decision. A credential that outlives it is a gap to report, not a route to use. |
 | "I will ask Apono and start the local tool at the same time." | The local call lands first, so the broker decided nothing. Sequence matters. |
 
