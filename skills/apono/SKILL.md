@@ -3,12 +3,13 @@ name: apono
 description: >-
   Use when a task touches infrastructure or SaaS that Apono brokers - AWS (S3, EC2, EKS,
   Lambda, RDS, IAM, Secrets Manager, DynamoDB, SQS, KMS, Route53), Kubernetes clusters,
-  namespaces, pods, deployments, secrets, Helm, PostgreSQL, MySQL, MongoDB databases,
-  GitHub repositories, opening or reviewing a pull request, issues, branches, Jira,
-  Confluence, Grafana dashboards, Prometheus, Loki, alerts, on-call, Okta apps and groups,
-  Mixpanel, monday.com. Use before running aws, kubectl, helm, psql, mysql, mongosh, gh,
-  terraform, or a separate MCP server for those systems, and when access is missing,
-  denied, or pending.
+  namespaces, pods, deployments, logs, Helm, PostgreSQL, MySQL, MongoDB databases, GitHub
+  repositories, opening or reviewing a pull request, issues, branches, Jira, Confluence,
+  Grafana dashboards, Prometheus, Loki, alerts, on-call, Okta apps and groups, Mixpanel,
+  monday.com. Read-only inspection counts - listing tables or namespaces, checking sizes,
+  schemas, logs, or deploy history. Use at the start of such a task, not after deciding
+  access is needed, and before running aws, kubectl, helm, psql, mysql, mongosh, gh,
+  terraform, or a separate MCP server for those systems.
 ---
 
 # Apono

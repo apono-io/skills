@@ -79,6 +79,21 @@ The table below maps each domain to the words a user types and to the alternativ
 | Mixpanel | funnel, event, report | a Mixpanel MCP server |
 | monday.com | board, item, group, column | a monday.com MCP server |
 
+### The description carries the trigger timing
+
+The description states that read-only inspection counts, and that the skill applies at the
+start of a task rather than after the agent decides access is needed. Both statements are
+trigger conditions, so both belong in the description.
+
+Trigger testing showed why. Asked to list the tables in a database and their sizes, an
+agent selected no skill and explained that it would load the Apono skill later, if it ran a
+query. The body already answers that reasoning, and the body was unreachable: the agent
+deferred the load, so it never read the answer.
+
+A skill body cannot correct a decision the description lost. Guidance about when to engage
+therefore lives in the description, and the body holds only what applies after the skill is
+active.
+
 ### The procedure names roles, not tools
 
 The body describes four steps by role and names no gateway tool. Managed tool names change: the AWS variant replaces one tool with eight, and the access-request tool is due for replacement. The gateway publishes its own tool list and its own instructions into every session, so a tool name written in the skill is duplicated information with two update paths.
@@ -150,6 +165,7 @@ This branch is the only action in the skill that changes the machine, and it run
 - **AC-10**: THE skill SHALL claim no access on behalf of an account, and SHALL treat run-time discovery as the only source of what an account reaches.
 - **AC-11**: WHEN a maintainer merges a change to the default branch, THE update command SHALL deliver that change without a package release.
 - **AC-12**: WHEN a user directs the agent to a named local tool, THE agent SHALL comply, and SHALL state once that the call is outside Apono.
+- **AC-15**: WHEN a task names read-only inspection of a system in a listed domain, THE host SHALL activate the skill before the agent decides whether the task needs access.
 - **AC-14**: WHEN the `skills` CLI reads the repository, THE CLI SHALL parse the skill file and report one installed skill named `apono`.
 - **AC-13**: WHEN a user states only the outcome of a task, THE agent SHALL treat the statement as no override, and SHALL follow the discovery step.
 

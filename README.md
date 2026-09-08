@@ -10,8 +10,8 @@ asking for it every time.
 npx skills add apono-io/skills
 ```
 
-The `skills` CLI detects the AI clients on your machine — Claude Code, Claude Desktop,
-Cursor, Codex and others — and installs into all of them.
+The `skills` CLI detects the AI coding agents on your machine — Claude Code, Cursor,
+Codex, OpenCode and many more — and installs into each one it finds.
 
 | Action | Command |
 | --- | --- |
