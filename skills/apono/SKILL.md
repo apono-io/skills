@@ -102,11 +102,25 @@ Check for the Apono MCP *server*, not for its tools. A host may list a connected
 tools only on demand, so an absent tool name does not mean an absent gateway. The gateway
 is missing only when no `apono-agentic` server is connected to the session at all.
 
-In that case, tell the user, and offer to install it. Wait for confirmation, then run:
+In that case, tell the user, and offer to install it. Wait for confirmation.
+
+There are two installers, so check the platform before offering a command.
+
+On macOS, Linux, or WSL, run:
 
 ```
 curl -fsSL https://apono-agentic-releases.s3.amazonaws.com/install.sh | bash
 ```
 
-The script registers the gateway in every AI client on the machine and signs the user in.
-It needs Node 20 or later. Install nothing without confirmation.
+On Windows without WSL, run this in PowerShell. Every Windows 10 and 11 machine has
+Windows PowerShell, and the command above fails there before it starts, because `curl`
+in PowerShell is an alias for `Invoke-WebRequest` and no bash exists:
+
+```
+irm https://apono-agentic-releases.s3.amazonaws.com/install.ps1 | iex
+```
+
+Either script registers the gateway in every AI client on the machine and signs the user
+in. Under WSL the bash script registers Claude Code inside Linux, and Claude Desktop and
+Cursor on the Windows side, starting those two through `wsl.exe` so they use the same
+sign-in. Both need Node 20 or later. Install nothing without confirmation.
