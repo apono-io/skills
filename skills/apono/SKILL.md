@@ -132,11 +132,13 @@ away from the local cloud credentials on the machine. Claude Code receives deny 
 `~/.aws` and `~/.kube/config`, and Cursor receives instructions that refuse those commands.
 Nothing already in those files is removed, and each file is backed up first.
 
-The offer needs a terminal to answer on. A piped install has none, so the offer prints,
-nothing is applied, and the install still succeeds. A user who runs the command by hand is
-asked; a user installed through this skill is not.
+The offer needs a terminal to answer on. Both commands above keep one, because the pipe
+carries the script rather than the answer, so a user who runs either by hand is asked. A
+caller with no terminal at all, such as a build step or an agent running the command with
+input redirected, is not asked: the offer prints, nothing is applied, and the install still
+succeeds.
 
-To apply the rules in the same run, add the flag:
+To apply the rules without being asked, add the flag:
 
 ```
 curl -fsSL https://apono-agentic-releases.s3.amazonaws.com/install.sh | bash -s -- --harden
