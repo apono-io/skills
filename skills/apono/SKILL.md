@@ -124,3 +124,32 @@ Either script registers the gateway in every AI client on the machine and signs 
 in. Under WSL the bash script registers Claude Code inside Linux, and Claude Desktop and
 Cursor on the Windows side, starting those two through `wsl.exe` so they use the same
 sign-in. Both need Node 20 or later. Install nothing without confirmation.
+
+### The optional credential guardrails
+
+Each installer ends by offering a second, separate change: rules that steer AI clients
+away from the local cloud credentials on the machine. Claude Code receives deny rules for
+`~/.aws` and `~/.kube/config`, and Cursor receives instructions that refuse those commands.
+Nothing already in those files is removed, and each file is backed up first.
+
+The offer needs a terminal to answer on. A piped install has none, so the offer prints,
+nothing is applied, and the install still succeeds. A user who runs the command by hand is
+asked; a user installed through this skill is not.
+
+To apply the rules in the same run, add the flag:
+
+```
+curl -fsSL https://apono-agentic-releases.s3.amazonaws.com/install.sh | bash -s -- --harden
+```
+
+```
+&([scriptblock]::Create((irm https://apono-agentic-releases.s3.amazonaws.com/install.ps1))) -Harden
+```
+
+Do not add that flag on your own. Offer it, say what it changes, and wait for the user to
+choose, exactly as with the install itself. One of the rules is `Edit(~/.claude/settings.json)`,
+which stops an agent editing the file that holds the rest. Applying the set therefore ends
+your own ability to undo it. That is deliberate, and the user can still edit the file by hand.
+
+The guardrails are a guardrail, not enforcement. A program that opens a file itself still
+reads it. For enforcement by the operating system, Claude Code offers `/sandbox`.
