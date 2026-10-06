@@ -33,8 +33,8 @@ Once active, it tells your agent to check what Apono already reaches before usin
 request access through Apono when none exists, and to report a denial rather than find
 another route.
 
-If the Apono gateway is not registered on the machine, the skill offers to install it and
-waits for your confirmation.
+If the Apono gateway is not connected to your agent, the agent says so and does not reach
+the system another way. It installs nothing and offers no install command.
 
 ## What it does not do
 
@@ -44,6 +44,40 @@ configuration, and stores no credentials.
 It states a preference; it does not enforce one. To make the preference binding, an
 administrator adds deny rules for the local tools in the host's own settings. That is a
 separate, deliberate step and is not part of this skill.
+
+## Install the Apono gateway
+
+The skill works through the Apono gateway, an MCP server that your agent connects to. If
+your agent says Apono is not connected, install the gateway on your own machine, not
+inside a container or a sandbox.
+
+On macOS, Linux or WSL:
+
+```
+curl -fsSL https://apono-agentic-releases.s3.amazonaws.com/install.sh | bash
+```
+
+On Windows without WSL, in PowerShell:
+
+```
+irm https://apono-agentic-releases.s3.amazonaws.com/install.ps1 | iex
+```
+
+Either script registers the gateway in every AI client on the machine and signs you in.
+Both need Node 20 or later.
+
+Each installer ends by offering optional rules that steer AI clients away from the local
+cloud credentials on the machine: deny rules for `~/.aws` and `~/.kube/config` in Claude
+Code, and matching instructions in Cursor. Each file is backed up first. To apply the
+rules without being asked, add the flag:
+
+```
+curl -fsSL https://apono-agentic-releases.s3.amazonaws.com/install.sh | bash -s -- --harden
+```
+
+```
+&([scriptblock]::Create((irm https://apono-agentic-releases.s3.amazonaws.com/install.ps1))) -Harden
+```
 
 ## Updating
 
