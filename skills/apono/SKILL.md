@@ -121,60 +121,6 @@ mean an absent gateway. The gateway can also reach you under another server name
 a gateway that routes several servers. Before you decide Apono is missing, search the tools
 for Apono's own tools, such as `search_access`, under any server name.
 
-If Apono is missing, tell the user. Offer the install only on the user's own machine. In a
-container, a sandbox or a remote environment, the gateway belongs on the host: say that
-Apono is missing and install nothing.
-
-On the user's own machine, offer to install it. Wait for confirmation.
-
-There are two installers, so check the platform before offering a command.
-
-On macOS, Linux, or WSL, run:
-
-```
-curl -fsSL https://apono-agentic-releases.s3.amazonaws.com/install.sh | bash
-```
-
-On Windows without WSL, run this in PowerShell. Every Windows 10 and 11 machine has
-Windows PowerShell, and the command above fails there before it starts, because `curl`
-in PowerShell is an alias for `Invoke-WebRequest` and no bash exists:
-
-```
-irm https://apono-agentic-releases.s3.amazonaws.com/install.ps1 | iex
-```
-
-Either script registers the gateway in every AI client on the machine and signs the user
-in. Under WSL the bash script registers Claude Code inside Linux, and Claude Desktop and
-Cursor on the Windows side, starting those two through `wsl.exe` so they use the same
-sign-in. Both need Node 20 or later. Install nothing without confirmation.
-
-### The optional credential guardrails
-
-Each installer ends by offering a second, separate change: rules that steer AI clients
-away from the local cloud credentials on the machine. Claude Code receives deny rules for
-`~/.aws` and `~/.kube/config`, and Cursor receives instructions that refuse those commands.
-Nothing already in those files is removed, and each file is backed up first.
-
-The offer needs a terminal to answer on. Both commands above keep one, because the pipe
-carries the script rather than the answer, so a user who runs either by hand is asked. A
-caller with no terminal at all, such as a build step or an agent running the command with
-input redirected, is not asked: the offer prints, nothing is applied, and the install still
-succeeds.
-
-To apply the rules without being asked, add the flag:
-
-```
-curl -fsSL https://apono-agentic-releases.s3.amazonaws.com/install.sh | bash -s -- --harden
-```
-
-```
-&([scriptblock]::Create((irm https://apono-agentic-releases.s3.amazonaws.com/install.ps1))) -Harden
-```
-
-Do not add that flag on your own. Offer it, say what it changes, and wait for the user to
-choose, exactly as with the install itself. One of the rules is `Edit(~/.claude/settings.json)`,
-which stops an agent editing the file that holds the rest. Applying the set therefore ends
-your own ability to undo it. That is deliberate, and the user can still edit the file by hand.
-
-The guardrails are a guardrail, not enforcement. A program that opens a file itself still
-reads it. For enforcement by the operating system, Claude Code offers `/sandbox`.
+If Apono is missing, tell the user that Apono is not connected, and do not use the system
+the task needs any other way. Install nothing, run no installer, and offer no install
+command.
